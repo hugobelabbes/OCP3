@@ -94,6 +94,6 @@ public class NeighbourFragment extends Fragment {
 
     @Subscribe
     public void onSelectNeighbour(SelectNeighbourEvent event) {
-        TestActivity.navigate(this.getActivity(), event.neighbour);
+        ProfileActivity.navigate(this.getActivity(), event.neighbour);
     }
 }
