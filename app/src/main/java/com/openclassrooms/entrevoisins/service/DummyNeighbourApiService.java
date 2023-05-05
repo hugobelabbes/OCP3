@@ -36,4 +36,15 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     public void createNeighbour(Neighbour neighbour) {
         neighbours.add(neighbour);
     }
+
+    @Override
+    public Neighbour getByID(Long id){
+        for (Neighbour n : neighbours) {
+            if (n.getId() == id){
+                return n;
+            }
+        }
+        return null;
+    }
+
 }

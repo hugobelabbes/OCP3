@@ -24,6 +24,9 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Long id = intent.getLongExtra("voisin_id", 0);
         NeighbourApiService service = DI.getNeighbourApiService();
+        Neighbour neighbour = service.getByID(id);
+
+        System.out.println(neighbour.getName());
         //Rajouter une méthode dans le NeighbourApiService pour récupérer un voisin par son ID
         //Utiliser les BindView et les SetText
     }

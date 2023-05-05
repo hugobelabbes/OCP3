@@ -5,7 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.neighbour_list.ProfileActivity">
+<!--
 
+Absorbance désirée :
+
+-NestedScrollView
+-   ConstraintLayout
+-       ImageView (avatar)
+-       TextView (username)
+-       ImageButton (returnbutton) (a voir)
+-       FloattingActionButton (Favoris)
+-       Cardview
+-           LinearLayout vertical
+-               TextView (Titre type "Coordonnées")
+-               View (ligne séparatrice)
+-               ConstraintLayout
+-                   ImageView (address icon)
+-                   TextView (address)
+-               ConstraintLayout
+-                   ImageView (tel icon)
+-                   TextView (tel)
+-               ConstraintLayout
+-                   ImageView (réseausocial)
+-                   TextView (réseausocial)
+-       Cardview
+-           LinearLayout vertical
+-               TextView (Titre du A propos)
+-               View (Ligne séparatrice)
+-               TextView (A propos)
+-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,14 +47,14 @@
             android:id="@+id/user_avatar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:maxHeight="200dp"
-            android:layout_gravity="center_horizontal">
-        </ImageView>
+            app:srcCompat="@drawable/ic_account"></ImageView>
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:text="User name">
@@ -41,14 +69,14 @@
             <TextView
                 android:id="@+id/user_phone"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="XX.XX.XX.XX.XX"></TextView>
 
             <TextView
                 android:id="@+id/user_address"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="2, rue de la Mairie">
 
@@ -78,6 +106,7 @@
 
 
         </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
