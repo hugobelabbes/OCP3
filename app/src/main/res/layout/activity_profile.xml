@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.neighbour_list.ProfileActivity">
 <!--
 
 Absorbance désirée :
@@ -34,60 +28,61 @@ Absorbance désirée :
 -               View (Ligne séparatrice)
 -               TextView (A propos)
 -->
-    <LinearLayout
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/user_avatar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:maxHeight="200dp"
-            app:srcCompat="@drawable/ic_account"></ImageView>
+            android:layout_width="408dp"
+            android:layout_height="276dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_account" />
 
         <TextView
             android:id="@+id/user_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="User name">
+            android:text="Jean Dupont"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar" />
 
-        </TextView>
+        <ImageButton
+            android:id="@+id/return_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_revert" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fav_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/return_button"
+            app:layout_constraintTop_toBottomOf="@+id/return_button"
+            app:srcCompat="@drawable/ic_star_border_white_24dp" />
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cardView_adress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:id="@+id/user_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="XX.XX.XX.XX.XX"></TextView>
-
-            <TextView
-                android:id="@+id/user_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="2, rue de la Mairie">
-
-            </TextView>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_name">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,18 +90,129 @@ Absorbance désirée :
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/user_about"
+                    android:id="@+id/adress_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id bibendum arcu. Maecenas nec ipsum blandit, fringilla nisl ullamcorper, porttitor justo. Nunc vitae justo ultrices, finibus quam nec, semper magna. Nullam rutrum, magna at dignissim convallis, lectus nisi gravida nisl, eget sodales ligula eros congue magna. Quisque blandit condimentum pharetra. Pellentesque convallis, nunc sit amet pulvinar cursus, eros turpis semper est, ut mattis dolor metus non tellus. Praesent dapibus, arcu id ullamcorper blandit, ex tellus aliquet metus, at dictum ipsum libero at ipsum. Phasellus at nibh sit amet nibh egestas finibus vel eu ex.">
+                    android:text="Adresse"
+                    android:textSize="16sp" />
 
-                </TextView>
+                <View
+                    android:id="@+id/split_line_adress"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@android:color/holo_green_dark" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/adress_icon"
+                        android:layout_width="64px"
+                        android:layout_height="64px"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:srcCompat="@drawable/ic_adress" />
+
+                    <TextView
+                        android:id="@+id/adress_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="2 rue de la Cathédrale 75000 PARIS "
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/adress_icon"
+                        app:layout_constraintTop_toTopOf="@+id/adress_icon" />
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/phone_icon"
+                        android:layout_width="64px"
+                        android:layout_height="64px"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:srcCompat="@drawable/ic_phone" />
+
+                    <TextView
+                        android:id="@+id/phone_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="06.01.02.03.04"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/phone_icon"
+                        app:layout_constraintStart_toEndOf="@+id/phone_icon"
+                        app:layout_constraintTop_toTopOf="@+id/phone_icon" />
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/socials_icon"
+                        android:layout_width="64px"
+                        android:layout_height="64px"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:srcCompat="@drawable/ic_network" />
+
+                    <TextView
+                        android:id="@+id/socials_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="facebook/jeandupont"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/socials_icon"
+                        app:layout_constraintStart_toEndOf="@+id/socials_icon"
+                        app:layout_constraintTop_toTopOf="@+id/socials_icon" />
+                </android.support.constraint.ConstraintLayout>
+
             </LinearLayout>
-
-
         </android.support.v7.widget.CardView>
 
-    </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView_adress">
 
-</android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/about_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A propos"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/split_line_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/about_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet posuere magna, non rutrum turpis. Donec consequat lorem eget nulla fringilla condimentum. Nam fringilla eu urna nec tempus. Aenean sodales dui in erat pulvinar dignissim vitae vel nisi. Nulla aliquet eget lacus id lobortis. Pellentesque vehicula libero quis libero venenatis, bibendum lacinia risus rutrum. Nunc mollis nulla ut egestas elementum. Maecenas vel magna nec erat lobortis eleifend. Cras volutpat eleifend lectus quis finibus."
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

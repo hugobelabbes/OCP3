@@ -25,6 +25,17 @@ public class Neighbour {
     /** About me */
     private String aboutMe;
 
+    public boolean isFavo() {
+        return isFavo;
+    }
+
+    public void setFavo(boolean favo) {
+        isFavo = favo;
+    }
+
+    /** Favo */
+    private boolean isFavo;
+
     /**
      * Constructor
      * @param id
