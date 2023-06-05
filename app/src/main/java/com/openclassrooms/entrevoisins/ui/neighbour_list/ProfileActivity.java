@@ -15,17 +15,12 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.Logger;
+import org.w3c.dom.Text;
 
 import java.io.Serializable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-//A commenter, faire un cours sur :
-//-Comment Bind un element
-//-Comment bind un element image (glide)
-//-Refaire le point sur l'activity profile
-//-Faire des tests ui
 
 public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.user_avatar)
@@ -33,6 +28,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.user_name)
     public TextView user_name;
+
+    @BindView(R.id.adress_label)
+    public TextView adress_label;
+
+    @BindView(R.id.phone_label)
+    public TextView phone_label;
+
+    @BindView(R.id.about_label)
+    public TextView about_label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +47,18 @@ public class ProfileActivity extends AppCompatActivity {
         NeighbourApiService service = DI.getNeighbourApiService();
         Neighbour neighbour = service.getByID(id);
 
-        System.out.println(neighbour.getName());
-
         //Bind les elements ui
         ButterKnife.bind(this);
         Glide.with(user_avatar.getContext()).load(neighbour.getAvatarUrl()).centerCrop().into(user_avatar);
+        //Username
         user_name.setText(neighbour.getName());
+        //Adresse
+        adress_label.setText(neighbour.getAddress());
+        //Tel
+        phone_label.setText(neighbour.getPhoneNumber());
+        //About
+        about_label.setText(neighbour.getAboutMe());
+
         //Rajouter une méthode dans le NeighbourApiService pour récupérer un voisin par son ID
         //Utiliser les BindView et les SetText
     }
