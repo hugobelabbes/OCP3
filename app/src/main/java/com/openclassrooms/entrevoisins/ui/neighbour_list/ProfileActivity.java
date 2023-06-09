@@ -1,6 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,11 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.about_label)
     public TextView about_label;
 
+    @BindView(R.id.fav_button)
+    public FloatingActionButton fav_button;
+
+    //Rajouter le binding du réseau social (facebook.com/[nom]) -> neighbour.getname
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +65,24 @@ public class ProfileActivity extends AppCompatActivity {
         //About
         about_label.setText(neighbour.getAboutMe());
 
-        //Rajouter une méthode dans le NeighbourApiService pour récupérer un voisin par son ID
-        //Utiliser les BindView et les SetText
+        //Setting des favoris au clic sur le bouton
+        fav_button.setOnClickListener(v ->{
+            //Appel de la méthode setIsFavoritNeighbour pour lui attribuer l'inverse de ce qu'il a (!neighbour.isFavorite())
+            service.setIsFavoritNeighbour(neighbour.getId(), !neighbour.isFavorite());
+            //Ajouter appel de méthode ci-dessous (modification icone favori) -> Modification au clic
+        });
+        //Ajouter appel de méthode ci-dessous (modification icone favori) une deuxième fois -> Modification à l'affichage initial
+
+
     }
+    //Ajouter et modifier la méthode suivante (Changement de l'icone Favori):
+    //public void setNeighbourFavoriteIconIfNeeded(Boolean isFavorite) {
+    //        fav_button.setImageResource(
+    //                !isFavorite ?
+    //                R.drawable.ic_star_border_white_24dp :
+    //                R.drawable.ic_star_white_24dp
+    //        );
+    //    }
 
     public static void navigate(FragmentActivity activity, Neighbour neighbour){
         Intent intent = new Intent(activity, ProfileActivity.class);

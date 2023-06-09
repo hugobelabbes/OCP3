@@ -28,5 +28,13 @@ public interface NeighbourApiService {
      */
     void createNeighbour(Neighbour neighbour);
 
+    //Rajouter commentaire ici basé sur le même modèle que ci dessus
     Neighbour getByID(Long id);
+
+    //Récupérer liste des users favo
+    List<Neighbour> getFavorites();
+
+    void setIsFavoritNeighbour(Long id, Boolean isFavorit);
+
+
 }

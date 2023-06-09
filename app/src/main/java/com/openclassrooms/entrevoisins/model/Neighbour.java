@@ -25,16 +25,11 @@ public class Neighbour {
     /** About me */
     private String aboutMe;
 
-    public boolean isFavo() {
-        return isFavo;
-    }
 
-    public void setFavo(boolean favo) {
-        isFavo = favo;
-    }
 
-    /** Favo */
-    private boolean isFavo;
+
+    /** Favorite */
+    private boolean isFavorite;
 
     /**
      * Constructor
@@ -50,6 +45,7 @@ public class Neighbour {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
+        this.isFavorite = false;
     }
 
     public long getId() {
@@ -99,6 +95,10 @@ public class Neighbour {
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
     }
+
+    public boolean isFavorite() {return isFavorite;}
+
+    public void setFavorite(boolean favorite) {isFavorite = favorite;}
 
     @Override
     public boolean equals(Object o) {

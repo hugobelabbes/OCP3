@@ -1,33 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
 
-Absorbance désirée :
-
--NestedScrollView
--   ConstraintLayout
--       ImageView (avatar)
--       TextView (username)
--       ImageButton (returnbutton) (a voir)
--       FloattingActionButton (Favoris)
--       Cardview
--           LinearLayout vertical
--               TextView (Titre type "Coordonnées")
--               View (ligne séparatrice)
--               ConstraintLayout
--                   ImageView (address icon)
--                   TextView (address)
--               ConstraintLayout
--                   ImageView (tel icon)
--                   TextView (tel)
--               ConstraintLayout
--                   ImageView (réseausocial)
--                   TextView (réseausocial)
--       Cardview
--           LinearLayout vertical
--               TextView (Titre du A propos)
--               View (Ligne séparatrice)
--               TextView (A propos)
--->
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
