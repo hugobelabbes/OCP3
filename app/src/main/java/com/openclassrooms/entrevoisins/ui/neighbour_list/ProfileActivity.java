@@ -36,13 +36,14 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.phone_label)
     public TextView phone_label;
 
+    @BindView(R.id.socials_label)
+    public TextView socials_label;
+
     @BindView(R.id.about_label)
     public TextView about_label;
 
     @BindView(R.id.fav_button)
     public FloatingActionButton fav_button;
-
-    //Rajouter le binding du réseau social (facebook.com/[nom]) -> neighbour.getname
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
         adress_label.setText(neighbour.getAddress());
         //Tel
         phone_label.setText(neighbour.getPhoneNumber());
+        //Socials
+        socials_label.setText("facebook.com/" + neighbour.getName());
         //About
         about_label.setText(neighbour.getAboutMe());
 
