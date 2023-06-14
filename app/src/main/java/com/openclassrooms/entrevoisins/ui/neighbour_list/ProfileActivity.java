@@ -76,20 +76,24 @@ public class ProfileActivity extends AppCompatActivity {
         fav_button.setOnClickListener(v ->{
             //Appel de la méthode setIsFavoritNeighbour pour lui attribuer l'inverse de ce qu'il a (!neighbour.isFavorite())
             service.setIsFavoritNeighbour(neighbour.getId(), !neighbour.isFavorite());
-            //Ajouter appel de méthode ci-dessous (modification icone favori) -> Modification au clic
+            //Appel de la méthode de modification de l'icone favo en fonction de l'état de isFavorite
+            setNeighbourFavoriteIconIfNeeded(neighbour.isFavorite());
+
         });
-        //Ajouter appel de méthode ci-dessous (modification icone favori) une deuxième fois -> Modification à l'affichage initial
+        //Appel de la méthode de modification de l'icone favo en fonction de l'état de isFavorite
+        setNeighbourFavoriteIconIfNeeded(neighbour.isFavorite());
+
 
 
     }
-    //Ajouter et modifier la méthode suivante (Changement de l'icone Favori):
-    //public void setNeighbourFavoriteIconIfNeeded(Boolean isFavorite) {
-    //        fav_button.setImageResource(
-    //                !isFavorite ?
-    //                R.drawable.ic_star_border_white_24dp :
-    //                R.drawable.ic_star_white_24dp
-    //        );
-    //    }
+    //Changement de l'icone Favo si nécessaire
+    public void setNeighbourFavoriteIconIfNeeded(Boolean isFavorite) {
+            fav_button.setImageResource(
+                    !isFavorite ?
+                    R.drawable.ic_star_border_white_24dp :
+                    R.drawable.ic_star_white_24dp
+            );
+    }
 
     public static void navigate(FragmentActivity activity, Neighbour neighbour){
         Intent intent = new Intent(activity, ProfileActivity.class);
