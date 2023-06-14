@@ -1,5 +1,8 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import static android.icu.lang.UCharacter.toLowerCase;
+import static android.icu.lang.UCharacter.toUpperCase;
+
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -19,6 +22,7 @@ import org.greenrobot.eventbus.Logger;
 import org.w3c.dom.Text;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
         //Tel
         phone_label.setText(neighbour.getPhoneNumber());
         //Socials
-        socials_label.setText("facebook.com/" + neighbour.getName());
+        socials_label.setText("facebook.com/" + neighbour.getName().toLowerCase());
         //About
         about_label.setText(neighbour.getAboutMe());
 
