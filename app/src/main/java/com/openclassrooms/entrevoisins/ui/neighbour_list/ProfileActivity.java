@@ -3,6 +3,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import static android.icu.lang.UCharacter.toLowerCase;
 import static android.icu.lang.UCharacter.toUpperCase;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -49,6 +50,9 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.fav_button)
     public FloatingActionButton fav_button;
 
+    @BindView(R.id.return_button)
+    public ImageView return_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,9 +72,13 @@ public class ProfileActivity extends AppCompatActivity {
         //Tel
         phone_label.setText(neighbour.getPhoneNumber());
         //Socials
-        socials_label.setText("facebook.com/" + neighbour.getName().toLowerCase());
+        socials_label.setText(getString(R.string.socials) + neighbour.getName().toLowerCase());
         //About
         about_label.setText(neighbour.getAboutMe());
+
+        //Setting du retour en arrière au clic sur le bouton retour
+        return_button.setOnClickListener(v -> finish());
+        //finish() -> Ferme l'activité en cours
 
         //Setting des favoris au clic sur le bouton
         fav_button.setOnClickListener(v ->{

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,21 +29,32 @@ public class NeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
+    private static final String TAG = "NeighbourFragment";
+    private Boolean isFavorit;
 
 
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
      */
-    public static NeighbourFragment newInstance() {
+    public static NeighbourFragment newInstance(boolean isFavorit) {
         NeighbourFragment fragment = new NeighbourFragment();
+        // Use the bundle to pass the favorite_only parameter
+        Bundle args = new Bundle();
+        args.putBoolean("isFavorit", isFavorit);
+        fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
+        // get the favorite_only parameter from the bundle
+        isFavorit = getArguments().getBoolean("isFavorit");
+        // do some logging with the appropriate TAG
+        Log.d(TAG, "isFavorit = " + isFavorit);
     }
 
     @Override
@@ -60,7 +72,12 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
+        if (isFavorit){
+            mNeighbours = mApiService.getFavorites();
+        }
+        else{
+            mNeighbours = mApiService.getNeighbours();
+        }
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
     }
 
