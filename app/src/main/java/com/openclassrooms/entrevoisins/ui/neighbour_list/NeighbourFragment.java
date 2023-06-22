@@ -30,7 +30,7 @@ public class NeighbourFragment extends Fragment {
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
     private static final String TAG = "NeighbourFragment";
-    private Boolean isFavorit;
+    private Boolean isFragmentFavorit;
 
 
     /**
@@ -52,9 +52,9 @@ public class NeighbourFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
         // get the favorite_only parameter from the bundle
-        isFavorit = getArguments().getBoolean("isFavorit");
+        isFragmentFavorit = getArguments().getBoolean("isFavorit");
         // do some logging with the appropriate TAG
-        Log.d(TAG, "isFavorit = " + isFavorit);
+        Log.d(TAG, "isFavorit = " + isFragmentFavorit);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        if (isFavorit){
+        if (isFragmentFavorit){
             mNeighbours = mApiService.getFavorites();
         }
         else{
@@ -90,13 +90,18 @@ public class NeighbourFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+        if (!isFragmentFavorit){
+            EventBus.getDefault().register(this);
+        }
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
+        if (!isFragmentFavorit) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     /**
