@@ -57,4 +57,14 @@ public class NeighbourServiceTest {
         service.setIsFavoritNeighbour(neighbour.getId(), !neighbour.isFavorite());
         assertFalse(service.getFavorites().contains(neighbour));
     }
+
+    //Ajouter test pour vérifier l'ajout d'un user
+    @Test
+    public void addNeighbourWithSuccess() {
+        List<Neighbour> neighbours = service.getNeighbours();
+        int nombreDeVoisinsAvantAjout = neighbours.size();
+        Neighbour newNeighbour = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(1);
+        neighbours.add(newNeighbour);
+        assertTrue(neighbours.size() == nombreDeVoisinsAvantAjout+1);
+    }
 }
