@@ -61,10 +61,9 @@ public class NeighbourServiceTest {
     //Ajouter test pour vérifier l'ajout d'un user
     @Test
     public void addNeighbourWithSuccess() {
-        List<Neighbour> neighbours = service.getNeighbours();
-        int nombreDeVoisinsAvantAjout = neighbours.size();
-        Neighbour newNeighbour = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(1);
-        neighbours.add(newNeighbour);
-        assertTrue(neighbours.size() == nombreDeVoisinsAvantAjout+1);
+        int nombreDeVoisinsAvantAjout =service.getNeighbours().size();
+        Neighbour newNeighbour = service.getNeighbours().get(0);
+        service.createNeighbour(newNeighbour);
+        assertTrue(service.getNeighbours().size() == nombreDeVoisinsAvantAjout+1);
     }
 }
