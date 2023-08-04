@@ -58,7 +58,6 @@ public class NeighbourServiceTest {
         assertFalse(service.getFavorites().contains(neighbour));
     }
 
-    //Ajouter test pour vérifier l'ajout d'un user
     @Test
     public void addNeighbourWithSuccess() {
         int nombreDeVoisinsAvantAjout =service.getNeighbours().size();

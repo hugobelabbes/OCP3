@@ -7,6 +7,10 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
@@ -16,12 +20,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+import java.util.List;
 
 
 /**
@@ -31,9 +40,11 @@ import static org.hamcrest.core.IsNull.notNullValue;
 public class NeighboursListTest {
 
     // This is fixed
-    private static int ITEMS_COUNT = 12;
+    private static int ITEMS_COUNT = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.size();
+    private static int FIRST_POSITION_ITEM = 0;
 
     private ListNeighbourActivity mActivity;
+    private NeighbourApiService mService;
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
@@ -43,6 +54,7 @@ public class NeighboursListTest {
     public void setUp() {
         mActivity = mActivityRule.getActivity();
         assertThat(mActivity, notNullValue());
+        mService = DI.getNewInstanceApiService();
     }
 
     /**
@@ -66,6 +78,47 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT - 1));
+    }
+
+    @Test
+    public void myNeighboursList_onClickItem_shouldOpenProfileActivityCorrectly() {
+        // Given : We open the Profile Activity of the first neighbour of the list
+        // When : perform a click on the first item of the list
+        onView(withId(R.id.list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(FIRST_POSITION_ITEM, click()));
+
+        // Then : we check if all elements that should be displayed on profile activity are displayed
+        onView(withId(R.id.user_avatar))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.user_name))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.return_button))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.fav_button))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.cardView_adress))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.cardView_about))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void userName_onProfileActivity_isCorrect() {
+        List<Neighbour> neighbourList = mService.getNeighbours();
+        Neighbour neighbour = neighbourList.get(FIRST_POSITION_ITEM);
+
+        onView(withId(R.id.list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(FIRST_POSITION_ITEM, click()));
+
+        onView(withId(R.id.user_name))
+                .check(matches(withText(neighbour.getName())));
+        //Rajouter d'autres vérifiactions (user_avatar, adress..)
+    }
+
+
+    @Test
+    public void myFavoritesList_onFavoriteTabItem_showOnlyFavoriteNeighbours() {
+
     }
 }
