@@ -111,9 +111,16 @@ public class NeighboursListTest {
         onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(FIRST_POSITION_ITEM, click()));
 
+        onView(withId(R.id.user_avatar))
+                .check(matches(withText(neighbour.getAvatarUrl())));
         onView(withId(R.id.user_name))
                 .check(matches(withText(neighbour.getName())));
-        //Rajouter d'autres vérifiactions (user_avatar, adress..)
+        onView(withId(R.id.adress_label))
+                .check(matches(withText(neighbour.getAddress())));
+        onView(withId(R.id.phone_label))
+                .check(matches(withText(neighbour.getPhoneNumber())));
+        onView(withId(R.id.about_label))
+                .check(matches(withText(neighbour.getAboutMe())));
     }
 
 
