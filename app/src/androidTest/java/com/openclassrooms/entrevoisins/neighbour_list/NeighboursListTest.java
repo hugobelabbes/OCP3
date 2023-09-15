@@ -115,8 +115,6 @@ public class NeighboursListTest {
         onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(FIRST_POSITION_ITEM, click()));
 
-        //onView(withId(R.id.user_avatar))
-        //        .check(matches(withText(neighbour.getAvatarUrl())));
         onView(withId(R.id.user_name))
                 .check(matches(withText(neighbour.getName())));
         onView(withId(R.id.adress_label))
@@ -130,20 +128,14 @@ public class NeighboursListTest {
 
     @Test
     public void myFavoritesList_onFavoriteTabItem_showOnlyFavoriteNeighbours() {
-        //First check that there is 0 favorites neighbours in the favorites tab
-        /*onView(withId(R.id.container))
-                .perform(swipeLeft());
-        onView(withId(R.id.list_neighbours_favo))
-                .check(withItemCount(0));*/
 
-        //Then add a neighbour as favorite
+        //First add a neighbour as favorite
         onView(withId(R.id.container))
                 .perform(swipeRight());
         onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(FIRST_POSITION_ITEM, click()));
         onView(withId(R.id.fav_button))
                 .perform(click());
-
         pressBack();
 
         //Then check back is there is 1 favorite neighbour in the favorite tab
